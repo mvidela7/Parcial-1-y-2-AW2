@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del auto</title>
+</head>
+<body>
+
+    <h1>Detalle del auto</h1>
+
+    <nav>
+        <a href="/items.html">Ítems</a>
+        <a href="/procedimiento.html">Procedimiento</a>
+        <a href="/cerrar-sesion">Cerrar sesión</a>
+    </nav>
+
+    <main id="detalle-auto"></main>
+
+    <script>
+        //Obtenemos el ID del auto desde la URL
+        const parametros = new URLSearchParams(window.location.search);
+        const id = parametros.get('id');
+
+        //Consultamos el auto mediante su ID
+        async function cargarAuto() {
+            try {
+                const respuesta = await fetch(`/api/v1/autos/${id}`);
+
+                if (!respuesta.ok) {
+                    document.getElementById('detalle-auto').textContent =
+                        'No se encontró el auto';
+                    return;
+                }
+
+                const auto = await respuesta.json();
+
+                document.getElementById('detalle-auto').innerHTML = `
+                    <h2>${auto.marca} ${auto.modelo}</h2>
+                    <p>Año: ${auto.año}</p>
+                    <p>Precio: $${auto.precio}</p>
+                    <p>Stock: ${auto.stock}</p>
+                `;
+
+            } catch (error) {
+                console.error('Error al obtener el auto:', error);
+            }
+        }
+
+        if (id) {
+            cargarAuto();
+        } else {
+            document.getElementById('detalle-auto').textContent =
+                'No se indicó un ID de auto';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,12 +1,10 @@
-import { readFile } from 'fs/promises';
-import procedimiento from '../utilidades/procedimiento.autos.mjs';
+import modelo from '../modelos/modelo-autos.mjs';
+import procedimiento from '../utilidades/procedimiento-autos.mjs';
 
 //Controlador para manejar las rutas relacionadas con los autos
 async function obtenerAutos(req, res) {
     try {
-        const datos = await readFile('./datos/autos.json');
-
-        const autos = JSON.parse(datos);
+        const autos = await modelo.obtenerAutos();
 
         return res.status(200).json(autos);
     } catch (error) {
@@ -18,22 +16,14 @@ async function obtenerAutos(req, res) {
     }
 }
 
-//Controlador para manejar la ruta de obtener un auto por su ID
+//Controlador para obtener un auto por su ID
 async function obtenerAuto(req, res) {
     try {
         const { id } = req.params;
 
-        const datos = await readFile('./datos/autos.json');
+        const auto = await modelo.obtenerAuto(parseInt(id));
 
-        const autos = JSON.parse(datos);
-        
-        //Convertimos los valores a números para comparar correctamente los ID
-        const auto = autos.find((auto) => {
-            return parseInt(id) === parseInt(auto.id);
-        });
-
-        // Verificamos si el auto fue encontrado
-        // Si no existe, devolvemos el código 404
+        //Verificamos si el auto fue encontrado
         if (!auto) {
             return res.status(404).json({
                 mensaje: 'Auto no encontrado'
@@ -50,16 +40,17 @@ async function obtenerAuto(req, res) {
         });
     }
 }
-//Controlador para manejar la ruta del procedimiento de valor del stock
+
+//Controlador para manejar el procedimiento de valor del stock
 async function valorStock(req, res, next) {
     try {
         const resultado = await procedimiento.calcularValorStock();
-        //Guardamos el resultado del procedimiento en en la peticion
+
         req.resultadoProcedimiento = {
             procedimiento: 'Calcular valor del stock',
             resultado: resultado
         };
-        //Esto hace que Express continue con el middleware 
+
         next();
 
     } catch (error) {
@@ -71,10 +62,9 @@ async function valorStock(req, res, next) {
     }
 }
 
-//Exportamos los controladores para que puedan ser utilizados en otros módulos
+//Exportamos los controladores
 export default {
     obtenerAutos,
     obtenerAuto,
     valorStock
 };
-

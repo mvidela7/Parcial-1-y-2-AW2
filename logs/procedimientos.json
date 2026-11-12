@@ -1,0 +1,7 @@
+{
+  "procedimiento": "Calcular valor del stock",
+  "resultado": {
+    "autosProcesados": 8,
+    "valorTotalStock": 640000000
+  }
+}

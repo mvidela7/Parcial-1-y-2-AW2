@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedimiento - Concesionaria</title>
+</head>
+<body>
+
+    <h1>Procedimiento de valor del stock</h1>
+
+    <nav>
+        <a href="/items.html">Ítems</a>
+        <a href="/procedimiento.html">Procedimiento</a>
+        <a href="/cerrar-sesion">Cerrar sesión</a>
+    </nav>
+
+    <main>
+        <p>
+            Este procedimiento calcula el valor total del stock,
+            multiplicando el precio de cada auto por su cantidad disponible.
+        </p>
+
+        <button onclick="ejecutarProcedimiento()">
+            Ejecutar procedimiento
+        </button>
+
+        <div id="resultado"></div>
+    </main>
+
+    <script>
+        //Ejecutamos el procedimiento desde la API
+        async function ejecutarProcedimiento() {
+            const resultado = document.getElementById('resultado');
+
+            try {
+                const respuesta = await fetch('/procedimiento/valor-stock');
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    resultado.textContent = 'No se pudo ejecutar el procedimiento';
+                    return;
+                }
+
+                resultado.innerHTML = `
+                    <h2>Procedimiento ejecutado correctamente</h2>
+                    <p>Autos procesados: ${datos.resultado.autosProcesados}</p>
+                    <p>Valor total del stock: $${datos.resultado.valorTotalStock}</p>
+                `;
+
+            } catch (error) {
+                resultado.textContent = 'Error al ejecutar el procedimiento';
+                console.error(error);
+            }
+        }
+    </script>
+
+</body>
+</html>
