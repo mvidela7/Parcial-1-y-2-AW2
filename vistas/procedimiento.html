@@ -1,59 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procedimiento - Concesionaria</title>
+    <title>Procedimiento - AutoGestión</title>
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body>
 
-    <h1>Procedimiento de valor del stock</h1>
+    <header class="menu">
+        <div class="logo">AutoGestión</div>
 
-    <nav>
-        <a href="/items.html">Ítems</a>
-        <a href="/procedimiento.html">Procedimiento</a>
-        <a href="/cerrar-sesion">Cerrar sesión</a>
-    </nav>
+        <nav>
+            <ul class="menu-links">
+                <li><a href="/items.html">Ítems</a></li>
+                <li><a href="/procedimiento.html" class="activo">Procedimiento</a></li>
+                <li><a href="/cerrar-sesion" class="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <main>
-        <p>
-            Este procedimiento calcula el valor total del stock,
-            multiplicando el precio de cada auto por su cantidad disponible.
-        </p>
+    <main class="contenedor">
 
-        <button onclick="ejecutarProcedimiento()">
-            Ejecutar procedimiento
-        </button>
+        <div class="encabezado">
+            <h1>Valor total del stock</h1>
+            <p class="descripcion">
+                Calculá el valor de todos los vehículos disponibles.
+            </p>
+        </div>
 
-        <div id="resultado"></div>
+        <div class="resultado">
+            <h2>¿Qué hace este procedimiento?</h2>
+
+            <p>
+                Calcula el valor total del stock multiplicando
+                el precio de cada vehículo por su cantidad disponible.
+            </p>
+
+            <button class="boton" id="btn-ejecutar">
+                Ejecutar procedimiento
+            </button>
+
+            <div id="resultado"></div>
+        </div>
+
     </main>
 
-    <script>
-        //Ejecutamos el procedimiento desde la API
-        async function ejecutarProcedimiento() {
-            const resultado = document.getElementById('resultado');
+    <footer class="pie">
+        <p>AutoGestión - Sistema de gestión de vehículos</p>
+    </footer>
 
-            try {
-                const respuesta = await fetch('/procedimiento/valor-stock');
-                const datos = await respuesta.json();
-
-                if (!respuesta.ok) {
-                    resultado.textContent = 'No se pudo ejecutar el procedimiento';
-                    return;
-                }
-
-                resultado.innerHTML = `
-                    <h2>Procedimiento ejecutado correctamente</h2>
-                    <p>Autos procesados: ${datos.resultado.autosProcesados}</p>
-                    <p>Valor total del stock: $${datos.resultado.valorTotalStock}</p>
-                `;
-
-            } catch (error) {
-                resultado.textContent = 'Error al ejecutar el procedimiento';
-                console.error(error);
-            }
-        }
-    </script>
+    <script src="/js/procedimiento.js"></script>
 
 </body>
 </html>

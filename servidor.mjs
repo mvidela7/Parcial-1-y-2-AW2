@@ -32,6 +32,8 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'vistas', 'login.html'));
 });
 
+app.use('/css', express.static(path.join(__dirname, 'vistas', 'css')));
+
 //Protegemos las rutas de autos y procedimientos
 app.use('/api/v1', verificarToken);
 app.use('/procedimiento', verificarToken);
@@ -40,6 +42,8 @@ app.use('/procedimiento', verificarToken);
 app.use(rutasAutos);
 
 //Protegemos las páginas del sistema
+app.use('/css', verificarToken, express.static(path.join(__dirname, 'vistas', 'css')));
+app.use('/js', verificarToken, express.static(path.join(__dirname, 'vistas', 'js')));
 app.use(verificarToken, express.static(path.join(__dirname, 'vistas')));
 
 app.listen(PUERTO, () => {

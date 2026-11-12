@@ -1,59 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del auto</title>
+    <title>Detalle del vehículo - AutoGestión</title>
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body>
 
-    <h1>Detalle del auto</h1>
+    <header class="menu">
+        <div class="logo">AutoGestión</div>
 
-    <nav>
-        <a href="/items.html">Ítems</a>
-        <a href="/procedimiento.html">Procedimiento</a>
-        <a href="/cerrar-sesion">Cerrar sesión</a>
-    </nav>
+        <nav>
+            <ul class="menu-links">
+                <li><a href="/items.html">Ítems</a></li>
+                <li><a href="/procedimiento.html">Procedimiento</a></li>
+                <li><a href="/cerrar-sesion" class="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <main id="detalle-auto"></main>
+    <main class="contenedor">
 
-    <script>
-        //Obtenemos el ID del auto desde la URL
-        const parametros = new URLSearchParams(window.location.search);
-        const id = parametros.get('id');
+        <div class="encabezado">
+            <h1>Detalle del vehículo</h1>
+            <p class="descripcion">Información del vehículo seleccionado.</p>
+        </div>
 
-        //Consultamos el auto mediante su ID
-        async function cargarAuto() {
-            try {
-                const respuesta = await fetch(`/api/v1/autos/${id}`);
+        <div id="detalle-auto" class="resultado"></div>
 
-                if (!respuesta.ok) {
-                    document.getElementById('detalle-auto').textContent =
-                        'No se encontró el auto';
-                    return;
-                }
+        <a href="/items.html" class="boton">Volver al catálogo</a>
 
-                const auto = await respuesta.json();
+    </main>
 
-                document.getElementById('detalle-auto').innerHTML = `
-                    <h2>${auto.marca} ${auto.modelo}</h2>
-                    <p>Año: ${auto.año}</p>
-                    <p>Precio: $${auto.precio}</p>
-                    <p>Stock: ${auto.stock}</p>
-                `;
+    <footer class="pie">
+        <p>AutoGestión - Sistema de gestión de vehículos</p>
+    </footer>
 
-            } catch (error) {
-                console.error('Error al obtener el auto:', error);
-            }
-        }
-
-        if (id) {
-            cargarAuto();
-        } else {
-            document.getElementById('detalle-auto').textContent =
-                'No se indicó un ID de auto';
-        }
-    </script>
+    <script src="/js/item.js"></script>
 
 </body>
 </html>

@@ -1,23 +1,50 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - Concesionaria</title>
+    <title>Iniciar sesión - AutoGestión</title>
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body>
 
-    <h1>Iniciar sesión</h1>
+    <main class="formulario">
+        <h1 class="titulo-login">Iniciar sesión</h1>
+        <p class="descripcion">Ingresá tus credenciales para continuar.</p>
 
-    <form action="/autenticacion" method="POST">
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" required>
+        <form action="/autenticacion" method="POST">
 
-        <label for="pass">Contraseña:</label>
-        <input type="password" id="pass" name="pass" required>
+            <div class="campo">
+                <label for="usuario">Usuario</label>
+                <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    placeholder="Ingresá tu usuario"
+                    required
+                >
+            </div>
 
-        <button type="submit">Ingresar</button>
-    </form>
+            <div class="campo">
+                <label for="pass">Contraseña</label>
+                <input
+                    type="password"
+                    id="pass"
+                    name="pass"
+                    placeholder="Ingresá tu contraseña"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="boton">Iniciar sesión</button>
+
+        </form>
+    </main>
+
+    <footer class="pie">
+        <p>AutoGestión - Sistema de gestión de vehículos</p>
+    </footer>
 
 </body>
 </html>

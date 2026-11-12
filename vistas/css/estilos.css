@@ -1,0 +1,194 @@
+
+/* ESTILOS GENERALES */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* MENU */
+
+.menu {
+    background-color: #0f172a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.menu-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-links a:hover {
+    color: #60a5fa;
+}
+
+/* CONTENIDO */
+
+.contenedor {
+    width: 90%;
+    margin: 40px auto;
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+.descripcion {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* AUTOS */
+
+.grilla-autos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.tarjeta {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.tarjeta h2 {
+    margin-bottom: 12px;
+    color: #0f172a;
+}
+
+.tarjeta p {
+    margin-bottom: 8px;
+}
+
+/* BOTONES */
+
+.boton {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.boton:hover {
+    background-color: #1d4ed8;
+}
+
+/* FORMULARIOS */
+
+.formulario {
+    background-color: white;
+    width: 400px;
+    max-width: 90%;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.campo input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* RESULTADOS */
+
+.resultado {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* PIE DE PAGINA */
+
+.pie {
+    background-color: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .grilla-autos {
+        grid-template-columns: 1fr;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .menu-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+.titulo-login {
+    text-align: left;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pie {
+    margin-top: auto;
+}
+
+#resultado {
+    margin-top: 20px;
+}
+
+#detalle-auto {
+    max-width: 650px;
+}

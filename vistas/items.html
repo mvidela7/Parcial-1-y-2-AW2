@@ -1,54 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de autos</title>
+    <title>Catálogo de vehículos - AutoGestión</title>
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body>
 
-    <h1>Listado de autos</h1>
+    <header class="menu">
+        <div class="logo">AutoGestión</div>
 
-    <nav>
-        <a href="/items.html">Ítems</a>
-        <a href="/procedimiento.html">Procedimiento</a>
-        <a href="/cerrar-sesion">Cerrar sesión</a>
-    </nav>
+        <nav>
+            <ul class="menu-links">
+                <li><a href="/items.html" class="activo">Ítems</a></li>
+                <li><a href="/procedimiento.html">Procedimiento</a></li>
+                <li><a href="/cerrar-sesion" class="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <main>
-        <div id="lista-autos"></div>
+    <main class="contenedor">
+
+        <div class="encabezado">
+            <h1>Catálogo de vehículos</h1>
+            <p class="descripcion">
+                Consultá los vehículos disponibles en nuestra concesionaria.
+            </p>
+        </div>
+
+        <div id="lista-autos" class="grilla-autos"></div>
+
     </main>
 
-    <script>
-        //Obtenemos los autos desde la API
-        async function cargarAutos() {
-            try {
-                const respuesta = await fetch('/api/v1/autos');
-                const autos = await respuesta.json();
+    <footer class="pie">
+        <p>AutoGestión - Sistema de gestión de vehículos</p>
+    </footer>
 
-                const lista = document.getElementById('lista-autos');
-
-                autos.forEach((auto) => {
-                    const elemento = document.createElement('div');
-
-                    elemento.innerHTML = `
-                        <h2>${auto.marca} ${auto.modelo}</h2>
-                        <p>Año: ${auto.año}</p>
-                        <p>Precio: $${auto.precio}</p>
-                        <p>Stock: ${auto.stock}</p>
-                        <a href="/item.html?id=${auto.id}">Ver detalle</a>
-                    `;
-
-                    lista.appendChild(elemento);
-                });
-
-            } catch (error) {
-                console.error('Error al cargar los autos:', error);
-            }
-        }
-
-        cargarAutos();
-    </script>
+    <script src="/js/items.js"></script>
 
 </body>
 </html>
